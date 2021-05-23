@@ -1,6 +1,6 @@
-# DiscordBot
+# Discord Bot
 
-A personal bot.
+A personal bot for discord.
 
 To use, add a config.json file with the following information:
 >{
@@ -14,7 +14,8 @@ Replies with a random line
 
 #### self defense move
 If a message starts with "self defense move" (not caps sensitive) then it replies with a random image replying to the person before you
-![self defense move command in action](https://prnt.sc/13bk4is)
+![self defense move command in action](https://cdn.discordapp.com/attachments/726529309904207933/846163100641001492/selfdefensemoveexample.png)
 
 ## Commands:
- - (!confused): Replies to the previous person with an image
+ - <mark>!confused</mark>: Replies to the previous person with an image
+ - <mark>!ping</mark>: responds with "Pong."
