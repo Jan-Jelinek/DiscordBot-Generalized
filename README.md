@@ -3,7 +3,7 @@
 To use, add a config.json file with the following information:
 >{
 >	"prefix": [PREFIX FOR COMMANDS],
->	"token": [YOUR TOKEN],
+>	"token": [YOUR TOKEN]
 >}
 
 ## Commands:
