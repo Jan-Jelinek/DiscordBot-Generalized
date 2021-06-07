@@ -28,6 +28,10 @@ Example with 3 commands:
 
 <img src="https://user-images.githubusercontent.com/47360894/120380138-048fe700-c2de-11eb-9561-bb126a5388ed.png" width="40%">
 
+### Randomly Timed Messages
+
+Set a message that will be sent randomly within a specified time frame.
+
 ## Work In Progress 
 
 ### Image Response Commands
