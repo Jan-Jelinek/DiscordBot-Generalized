@@ -1,9 +1,11 @@
 const config = require('./config.json');
 
 const fs = require('fs');
+const defaultResponses = fs.readFileSync("./json/defaultResponse.json");
 const Discord = require('discord.js');
 const { token } = require('./config.json');
 const imageReaction = require('./commands/image-replies/imageReaction');
+const { Console } = require('console');
 const prefix = "!";
 
 const client = new Discord.Client();
@@ -27,10 +29,18 @@ for (const folder of commandFolders) {
 /* Get image file names and save as command names */
 for (const file of imageFiles) {
 	client.images.set(file.substr(0, file.length-4), 1);
+  console.log(`Found: ${file}`);
 }
 
-/* Get list of default responses from text file */
+/**
+ * if the file does not end in a number:
+ *    add to a json: "filenameNoExtension : file"
+ * 
+ */
 
+client.on("ready", () => {
+  randomlyTimedMessage(client);
+});
 
 /* On message being sent */
 client.on('message', message => {
@@ -42,8 +52,10 @@ client.on('message', message => {
   
   if( message.mentions.users.first() === client.user) { // If the message mentions this bot
     args = message.content.trim().split(/ +/);
-    if( args.length === 1) 
+    if( args.length === 1) {
       commandName = 'defaultResponse';
+      args.push(defaultResponses);
+    }
     else 
       commandName = args[1].toLowerCase();
   }
@@ -62,7 +74,7 @@ client.on('message', message => {
     command = client.commands.get(commandName);  
   }
   else {
-    console.log(`no command detected, commandName: ${commandName}`);
+    //console.log(`no command detected, commandName: ${commandName}`);
     return;
   }
 
@@ -106,6 +118,13 @@ client.on('message', message => {
 });
 
 
+client.on('ready', () => {
+  console.log(`========================\nLogged in as ${client.user.tag}!`);
+});
+
+client.login(token);
+
+
 function readTextFile(file)
 {
     var rawFile = new XMLHttpRequest();
@@ -124,10 +143,14 @@ function readTextFile(file)
     rawFile.send(null);
 }
 
-
-
-client.on('ready', () => {
-  console.log(`========================\nLogged in as ${client.user.tag}!`);
-});
-
-client.login(token);
+// Every one to three days send a message to a specific channel
+function randomlyTimedMessage(client) {
+  const channel = client.channels.cache.find(channel => channel.id === "CHANNEL_ID");
+  (function loop() {
+    var rand = Math.round(Math.random() * (2*86400)) + 86400; // every 1 to 3 days but set to whatever you want. The numbers are seconds.
+    setTimeout(function() {
+    channel.send("This message will randomly be sent every 1 to 3 days");
+    loop();  
+    }, (rand*1000) ); // Converts ms to seconds
+}());
+}
