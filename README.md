@@ -7,13 +7,13 @@ To use:
 2. Add your token to config.json
 3. Customize to fit your needs
 
-## Replies
+## Features
 
 ### Default Response
 
 <img src="https://user-images.githubusercontent.com/47360894/120554732-55274300-c3b7-11eb-8200-3e627a4e738c.png" width="67%">
 
-When mentioned with no additional message the bot will response with a response from a json file in ./texts/defaultResponses.json
+When mentioned with no additional message the bot will respond with a random entity from ./texts/defaultResponses.json
 The higher the response, the more likely it is to be chosen.
 
 The probability of any command being chosen is (1+2x)/n^2 where x is the position in the list from the bottom (starting at 0) and n is the number of elements in the list.
